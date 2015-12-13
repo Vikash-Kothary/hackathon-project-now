@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     public void setupTablayout() {
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        tabLayout.addTab(tabLayout.newTab().setText("Own"));
+        tabLayout.addTab(tabLayout.newTab().setText("Owned"));
         tabLayout.addTab(tabLayout.newTab().setText("Joined"));
         tabLayout.addTab(tabLayout.newTab().setText("Nearby"));
 
