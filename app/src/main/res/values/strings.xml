@@ -1,9 +1,23 @@
 <resources>
     <string name="app_name">Now</string>
+
+    <string name="action_save">Save</string>
+    <string name="action_discard">Discard</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_view_event">View Event</string>
     <string name="hello_world">Hello world!</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="title_activity_create_event">Create Event</string>
+    <string name="hint_event_title">Event title</string>
+    <string name="hint_location">Location</string>
+    <string name="hint_radius">Radius (km)</string>
+    <string name="hint_category">Category</string>
+
+    <string-array name="country_arrays">
+        <item>Event</item>
+        <item>Festival</item>
+    </string-array>
 </resources>
