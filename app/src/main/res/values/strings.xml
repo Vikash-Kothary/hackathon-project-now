@@ -4,6 +4,7 @@
     <string name="action_save">Save</string>
     <string name="action_discard">Discard</string>
     <string name="action_settings">Settings</string>
+<<<<<<< HEAD
 
     <string name="title_activity_create_event">Create Event</string>
     <string name="hint_event_title">Event title</string>
@@ -15,4 +16,8 @@
         <item>Event</item>
         <item>Festival</item>
     </string-array>
+=======
+    <string name="title_activity_view_event">View Event</string>
+    <string name="hello_world">Hello world!</string>
+>>>>>>> refs/remotes/origin/master
 </resources>
