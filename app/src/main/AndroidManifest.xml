@@ -18,8 +18,13 @@
             </intent-filter>
         </activity>
         <activity
+<<<<<<< HEAD
+            android:name=".CreateEventActivity"
+            android:label="@string/title_activity_create_event"
+=======
             android:name=".ViewEventActivity"
             android:label="@string/title_activity_view_event"
+>>>>>>> refs/remotes/origin/master
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
