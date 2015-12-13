@@ -11,40 +11,25 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class Own_fragment extends Fragment {
-    List <String> events;
-    ListView listView;
+/**
+ * A placeholder fragment containing a simple view.
+ */
+public class ViewOwnerEventFragment extends Fragment {
+    private ArrayList<String> eventHistory;
+    private ArrayAdapter<String> arrayAdapter;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
+    public ViewOwnerEventFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        View rootview = inflater.inflate(R.layout.fragment_view_event, container, false);
+        ListView listView = (ListView) rootview.findViewById(R.id.listView_messages);
+        eventHistory = new ArrayList<>();
 
-        View rootView = inflater.inflate(R.layout.own_fragment_view , container , false);
-        if(rootView != null) {
-            listView = (ListView)rootView.findViewById(R.id.listviewOwnFragment);
-            listView.setVerticalScrollBarEnabled(true);
-            events = new ArrayList<>();
-            addEvents();
-
-        }
-        return rootView;
-    }
-
-    public void addEvents (){
-
-        events.add("HackKings");
-//        events.add("RandomEvent");
-
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1 , events);
+        arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, eventHistory);
         listView.setAdapter(arrayAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -56,6 +41,10 @@ public class Own_fragment extends Fragment {
                 startActivity(intent);
             }
         });
+        return rootview;
+    }
+
+    public void onNewMessage(String message) {
 
     }
 

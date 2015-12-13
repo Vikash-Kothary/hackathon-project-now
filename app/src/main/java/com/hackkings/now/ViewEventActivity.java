@@ -1,31 +1,80 @@
 package com.hackkings.now;
 
-import android.graphics.Color;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.pusher.client.Pusher;
+import com.pusher.client.channel.Channel;
+
 public class ViewEventActivity extends AppCompatActivity {
-    private TabLayout tabLayout;
     Fragment fragment;
+    private TabLayout tabLayout;
+    private String eventTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_event);
 
+        Intent intent = getIntent();
+        if (intent.hasExtra(MainActivity.EVENT_SELECTED)) {
+            eventTitle = intent.getStringExtra(MainActivity.EVENT_SELECTED);
+        }
+
         setupToolbar();
         setupTabLayout();
+        setupListView();
+        setupPusher();
+    }
+
+    private void setupListView() {
+
+    }
+
+    private void setupPusher() {
+        Pusher pusher = new Pusher("d91131e2dc8d85d998b3");
+
+        Channel channel = pusher.subscribe(eventTitle);
+
+//        AsyncHttpClient client = new AsyncHttpClient();
+//
+//        String baseURL = "https://hackkings-now.herokuapp.com";
+//        Event params = new Event(eventTitle);
+//        client.post(baseURL + "/events/subscribe", params, new JsonHttpResponseHandler(){
+//
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//
+//                        Toast.makeText(getApplicationContext(), "Something went right :)", Toast.LENGTH_LONG).show();
+//                    }
+//                });
+//            }
+//
+//            @Override
+//            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+//                Toast.makeText(getApplicationContext(), "Something went wrong :(", Toast.LENGTH_LONG).show();
+//            }
+//        });
+
+
+        pusher.connect();
     }
 
     private void setupToolbar(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(eventTitle);
         setSupportActionBar(toolbar);
         // Show menu icon
         final ActionBar ab = getSupportActionBar();
@@ -39,7 +88,7 @@ public class ViewEventActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Official"));
         tabLayout.addTab(tabLayout.newTab().setText("Public"));
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.chanelFragmentContainer, new ViewEventActivityFragment()).commit();
+                .add(R.id.chanelFragmentContainer, new ViewOwnerEventFragment()).commit();
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -51,7 +100,7 @@ public class ViewEventActivity extends AppCompatActivity {
                 int tabselected = tabLayout.getSelectedTabPosition();
                 switch (tabselected) {
                     case 0:
-                        fragment = new ViewEventActivityFragment();
+                        fragment = new ViewOwnerEventFragment();
                         break;
                     case 1:
                         fragment = new Joined_fragment();
